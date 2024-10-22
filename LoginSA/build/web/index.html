@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="estilos/estiloLogin.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <!-- Formulário de login enviando os dados para o LoginServlet -->
+        <form action="LoginServlet" method="POST">
+            <input type="text" name="username" placeholder="Digite o usuario" required>
+            <input type="password" name="password" placeholder="Digite a senha" required>
+             <div class="error" id="attemptMessage"><i class="fas fa-exclamation-triangle"></i> 3 tentativas restantes</div>
+            <button type="submit">Login</button>
+        </form>
+        <button id="register">Cadastrar</button>
+    </div>
+     <script>
+        let attemptsLeft = 3;
+
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Aqui você pode adicionar sua lógica de autenticação (simulação de login)
+            if (username === "adm" && password === "1234") {
+                alert("Login bem-sucedido!");
+            } else {
+                attemptsLeft--;
+                document.getElementById("attemptMessage").innerHTML = 
+                    `<i class="fas fa-exclamation-triangle"></i> ${attemptsLeft} tentativa(s) restante(s)`;
+
+                if (attemptsLeft <= 0) {
+                    document.getElementById("loginBtn").disabled = true;
+                    document.getElementById("attemptMessage").innerHTML = 
+                        `<i class="fas fa-exclamation-triangle"></i> Você foi bloqueado!`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
